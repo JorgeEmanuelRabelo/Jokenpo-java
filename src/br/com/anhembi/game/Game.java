@@ -12,37 +12,69 @@ public class Game {
 	private User users[];
 	private TypeGameEnum type;
 	private Random rand = new Random();
+	private int numberRounds = 0;
 
 	// Construtor vazio.
 	public Game() {
 	}
 
-	public TypeGameEnum getType() {
-		return type;
-	}
-
-	public void setType(TypeGameEnum type) {
-		this.type = type;
-	}
-
 	// Construtor responsável por setar valores iniciais do jogo.
-	public Game(User[] users, TypeGameEnum type) {
+	public Game(User[] users, TypeGameEnum type, int number_rounds) {
 		super();
 		this.users = users;
 		this.type = type;
+		this.numberRounds = number_rounds;
 	}
 
 	public void run() {
+
+		User pl1 = users[0];
+		User pl2 = users[1];
+
+		switch (type) {
+		case END_ROUND:
+			for (int i = 0; i <= numberRounds; i++) {
+				setActionPlayers();
+			}
+
+			break;
+		case NUMBER_ROUNDS:
+			for (int i = 0; i <= numberRounds; i++) {
+				setActionPlayers();
+			}
+
+			break;
+		case TWO_ROUND:
+			// Verifica se algum jogador teve duas vitórias.
+			while (pl1.getWonRounds() == 2 || pl2.getWonRounds() == 2) {
+				setActionPlayers();
+			}
+
+			break;
+
+		default:
+			setActionPlayers();
+			break;
+		}
+
+		matchResult();
+	}
+
+	/*
+	 * Inicializa as jogadas dos players
+	 */
+	private void setActionPlayers() {
 		// Player 1
 		users[0].setAction(Integer.parseInt(JOptionPane.showInputDialog(null, Messages.informsActions(), "Jogada",
 				JOptionPane.INFORMATION_MESSAGE)));
 
 		// Player 2 - Random - Gera número entre 0 e 3
 		users[1].setAction(rand.nextInt(4));
-
-		matchResult();
 	}
 
+	/*
+	 * Regras do jogo
+	 */
 	private void matchResult() {
 		User pl1 = users[0];
 		User pl2 = users[1];

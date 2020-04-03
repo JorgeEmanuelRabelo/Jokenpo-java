@@ -29,7 +29,7 @@ public class Start {
 				JOptionPane.INFORMATION_MESSAGE));
 
 		// Seta os valores iniciais do jogo.
-		Game game = new Game(users, TypeGameEnum.getEnum(typeGame));
+		Game game = new Game(users, TypeGameEnum.getEnum(typeGame), 0);
 		game.run();
 	}
 }

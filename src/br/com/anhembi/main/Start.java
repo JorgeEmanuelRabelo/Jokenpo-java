@@ -31,14 +31,20 @@ public class Start {
 		typeGame = Integer.parseInt(JOptionPane.showInputDialog(null, Messages.informsTypeGame(), "Tipo de jogo",
 				JOptionPane.INFORMATION_MESSAGE));
 
-		// Verifica se o usuário escolher informar o número de rodadas.
-		if (typeGame == 3) {
-			numberRounds = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o número de rodadas",
-					"Quantidade de rodadas", JOptionPane.INFORMATION_MESSAGE));
-		}
+		if (typeGame > 4) {
+			JOptionPane.showMessageDialog(null, "Escolha um opção valida", "Alerta", JOptionPane.WARNING_MESSAGE);
+			init();
+		} else {
 
-		// Seta os valores iniciais do jogo.
-		Game game = new Game(users, TypeGameEnum.getEnum(typeGame), numberRounds);
-		game.run();
+			// Verifica se o usuário escolher informar o número de rodadas.
+			if (typeGame == 3) {
+				numberRounds = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o número de rodadas",
+						"Quantidade de rodadas", JOptionPane.INFORMATION_MESSAGE));
+			}
+
+			// Seta os valores iniciais do jogo.
+			Game game = new Game(users, TypeGameEnum.getEnum(typeGame), numberRounds);
+			game.run();
+		}
 	}
 }

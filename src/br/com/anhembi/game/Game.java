@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import br.com.anhembi.main.Start;
 import br.com.anhembi.utils.ActionEnum;
 import br.com.anhembi.utils.Messages;
 import br.com.anhembi.utils.TypeGameEnum;
@@ -35,14 +36,14 @@ public class Game {
 		switch (type) {
 		case END_ROUND:
 			while (endGame) {
-				setActionPlayers(Messages.informsActionsEndGame());
+				setActionPlayers(Messages.informsActionsEndGame(), 4);
 				matchResult();
 			}
 
 			break;
 		case NUMBER_ROUNDS:
-			for (int i = 0; i < numberRounds; i++) {
-				setActionPlayers(Messages.informsActions());
+			for (int i = 0; i <= numberRounds; i++) {
+				setActionPlayers(Messages.informsActions(), 3);
 				matchResult();
 			}
 
@@ -50,13 +51,13 @@ public class Game {
 		case TWO_ROUND:
 			// Verifica se algum jogador teve duas vitórias.
 			while (pl1.getWonRounds() < 2 && pl2.getWonRounds() < 2) {
-				setActionPlayers(Messages.informsActions());
+				setActionPlayers(Messages.informsActions(), 3);
 				matchResult();
 			}
 			break;
 
 		default:
-			setActionPlayers(Messages.informsActions());
+			setActionPlayers(Messages.informsActions(), 3);
 			matchResult();
 			break;
 		}
@@ -67,20 +68,26 @@ public class Game {
 	/*
 	 * Inicializa as jogadas dos players
 	 */
-	private void setActionPlayers(String message) {
+	private void setActionPlayers(String message, int count) {
 		// Player 1
 		int actionPlayer1 = Integer
 				.parseInt(JOptionPane.showInputDialog(null, message, "Jogada", JOptionPane.INFORMATION_MESSAGE));
 
-		if (actionPlayer1 == 4) {
-			endGame = false;
-			return;
+		if (actionPlayer1 > count) {
+			JOptionPane.showMessageDialog(null, "Escolha um opção valida", "Alerta", JOptionPane.WARNING_MESSAGE);
+			new Start().init();
+		} else {
+
+			if (actionPlayer1 == 4) {
+				endGame = false;
+				return;
+			}
+
+			users[0].setAction(actionPlayer1);
+
+			// Player 2 - Random - Gera número entre 1 e 3
+			users[1].setAction(rand.nextInt(3) + 1);
 		}
-
-		users[0].setAction(actionPlayer1);
-
-		// Player 2 - Random - Gera número entre 0 e 3
-		users[1].setAction(rand.nextInt(4));
 	}
 
 	/*

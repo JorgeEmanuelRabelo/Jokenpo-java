@@ -9,7 +9,7 @@ public enum TypeGameEnum {
 		this.valor = valor;
 	}
 
-	public int getValorEnum() {
+	public int getValor() {
 		return this.valor;
 	}
 

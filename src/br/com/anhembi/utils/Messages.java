@@ -2,6 +2,8 @@ package br.com.anhembi.utils;
 
 import java.util.Arrays;
 
+import javax.swing.JOptionPane;
+
 import br.com.anhembi.game.User;
 
 public class Messages {
@@ -45,6 +47,13 @@ public class Messages {
 		return Arrays.toString(array).replace('[', ' ').replace(']', ' ').replace(',', '\n');
 	}
 
+	public static void resultGame(User[] users) {
+		JOptionPane.showMessageDialog(null,
+				Arrays.toString(users).replace('[', ' ').replace(']', ' ').replace(',', '\n'), "Resultado do jogo", 0,
+				null);
+		System.out.println(Messages.result(users));
+	}
+
 	/*
 	 * Método responsável por retornar o quadro final de valores.
 	 */
@@ -52,9 +61,10 @@ public class Messages {
 		User pl1 = users[0];
 		User pl2 = users[1];
 
-		String[] msg = new String[2];
+		String[] msg = new String[3];
 		msg[0] = "Player 1: " + pl1.getName() + " - Vitórias: " + pl1.getWonRounds();
 		msg[1] = "Player 2: " + pl2.getName() + " - Vitórias: " + pl2.getWonRounds();
+		msg[2] = "Empates: " + pl1.getTie();
 
 		return toStringArray(msg);
 	}

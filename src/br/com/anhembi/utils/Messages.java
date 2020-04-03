@@ -48,9 +48,8 @@ public class Messages {
 	}
 
 	public static void resultGame(User[] users) {
-		JOptionPane.showMessageDialog(null,
-				Arrays.toString(users).replace('[', ' ').replace(']', ' ').replace(',', '\n'), "Resultado do jogo", 0,
-				null);
+		JOptionPane.showMessageDialog(null, Messages.result(users), "Resultado do jogo",
+				JOptionPane.INFORMATION_MESSAGE);
 		System.out.println(Messages.result(users));
 	}
 
@@ -67,5 +66,10 @@ public class Messages {
 		msg[2] = "Empates: " + pl1.getTie();
 
 		return toStringArray(msg);
+	}
+
+	public static void playerWin(User player) {
+		String txt = "Player: " + player.getName() + " venceu a rodada";
+		JOptionPane.showMessageDialog(null, txt, "Resultado da partida", JOptionPane.INFORMATION_MESSAGE);
 	}
 }

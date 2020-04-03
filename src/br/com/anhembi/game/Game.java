@@ -8,6 +8,7 @@ import br.com.anhembi.main.Start;
 import br.com.anhembi.utils.ActionEnum;
 import br.com.anhembi.utils.Messages;
 import br.com.anhembi.utils.TypeGameEnum;
+import br.com.anhembi.utils.Utils;
 
 public class Game {
 	private User users[];
@@ -42,7 +43,7 @@ public class Game {
 
 			break;
 		case NUMBER_ROUNDS:
-			for (int i = 0; i <= numberRounds; i++) {
+			for (int i = 1; i <= numberRounds; i++) {
 				setActionPlayers(Messages.informsActions(), 3);
 				matchResult();
 			}
@@ -70,8 +71,8 @@ public class Game {
 	 */
 	private void setActionPlayers(String message, int count) {
 		// Player 1
-		int actionPlayer1 = Integer
-				.parseInt(JOptionPane.showInputDialog(null, message, "Jogada", JOptionPane.INFORMATION_MESSAGE));
+		int actionPlayer1 = Utils.validJOptionInteger(
+				JOptionPane.showInputDialog(null, message, "Jogada", JOptionPane.INFORMATION_MESSAGE));
 
 		if (actionPlayer1 > count) {
 			JOptionPane.showMessageDialog(null, "Escolha um opção valida", "Alerta", JOptionPane.WARNING_MESSAGE);

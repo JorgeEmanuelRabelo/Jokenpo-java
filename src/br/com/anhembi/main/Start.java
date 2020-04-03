@@ -6,6 +6,7 @@ import br.com.anhembi.game.Game;
 import br.com.anhembi.game.User;
 import br.com.anhembi.utils.Messages;
 import br.com.anhembi.utils.TypeGameEnum;
+import br.com.anhembi.utils.Utils;
 
 public class Start {
 
@@ -20,16 +21,19 @@ public class Start {
 		User users[] = new User[2];
 
 		// Player 1 - Usuário
-		String name = JOptionPane.showInputDialog(null, Messages.informsUser(), "Nome do usuário",
-				JOptionPane.INFORMATION_MESSAGE);
+		String name = "";
+
+		name = Utils.validJOption(JOptionPane.showInputDialog(null, Messages.informsUser(), "Nome do usuário",
+				JOptionPane.INFORMATION_MESSAGE));
+
 		users[0] = new User(name.toUpperCase());
 
 		// Player 2 - Computador
 		users[1] = new User("COMPUTADOR");
 
 		// Tipo de jogo
-		typeGame = Integer.parseInt(JOptionPane.showInputDialog(null, Messages.informsTypeGame(), "Tipo de jogo",
-				JOptionPane.INFORMATION_MESSAGE));
+		typeGame = Utils.validJOptionInteger(JOptionPane.showInputDialog(null, Messages.informsTypeGame(),
+				"Tipo de jogo", JOptionPane.INFORMATION_MESSAGE));
 
 		if (typeGame > 4) {
 			JOptionPane.showMessageDialog(null, "Escolha um opção valida", "Alerta", JOptionPane.WARNING_MESSAGE);
@@ -38,8 +42,8 @@ public class Start {
 
 			// Verifica se o usuário escolher informar o número de rodadas.
 			if (typeGame == 3) {
-				numberRounds = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o número de rodadas",
-						"Quantidade de rodadas", JOptionPane.INFORMATION_MESSAGE));
+				numberRounds = Utils.validJOptionInteger(JOptionPane.showInputDialog(null,
+						"Informe o número de rodadas", "Quantidade de rodadas", JOptionPane.INFORMATION_MESSAGE));
 			}
 
 			// Seta os valores iniciais do jogo.

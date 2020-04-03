@@ -13,6 +13,7 @@ public class Game {
 	private TypeGameEnum type;
 	private Random rand = new Random();
 	private int numberRounds = 0;
+	private boolean endGame = true;
 
 	// Construtor vazio.
 	public Game() {
@@ -33,29 +34,30 @@ public class Game {
 
 		switch (type) {
 		case END_ROUND:
-			for (int i = 0; i <= numberRounds; i++) {
-				setActionPlayers();
+			while (endGame) {
+				setActionPlayers(Messages.informsActionsEndGame());
 				matchResult();
 			}
 
 			break;
 		case NUMBER_ROUNDS:
-			for (int i = 0; i <= numberRounds; i++) {
-				setActionPlayers();
+			for (int i = 0; i < numberRounds; i++) {
+				setActionPlayers(Messages.informsActions());
 				matchResult();
 			}
 
 			break;
 		case TWO_ROUND:
 			// Verifica se algum jogador teve duas vitórias.
-			while (pl1.getWonRounds() < 2 || pl2.getWonRounds() < 2) {
-				setActionPlayers();
+			while (pl1.getWonRounds() < 2 && pl2.getWonRounds() < 2) {
+				setActionPlayers(Messages.informsActions());
 				matchResult();
 			}
 			break;
 
 		default:
-			setActionPlayers();
+			setActionPlayers(Messages.informsActions());
+			matchResult();
 			break;
 		}
 
@@ -65,10 +67,17 @@ public class Game {
 	/*
 	 * Inicializa as jogadas dos players
 	 */
-	private void setActionPlayers() {
+	private void setActionPlayers(String message) {
 		// Player 1
-		users[0].setAction(Integer.parseInt(JOptionPane.showInputDialog(null, Messages.informsActions(), "Jogada",
-				JOptionPane.INFORMATION_MESSAGE)));
+		int actionPlayer1 = Integer
+				.parseInt(JOptionPane.showInputDialog(null, message, "Jogada", JOptionPane.INFORMATION_MESSAGE));
+
+		if (actionPlayer1 == 4) {
+			endGame = false;
+			return;
+		}
+
+		users[0].setAction(actionPlayer1);
 
 		// Player 2 - Random - Gera número entre 0 e 3
 		users[1].setAction(rand.nextInt(4));

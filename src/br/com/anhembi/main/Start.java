@@ -9,6 +9,9 @@ import br.com.anhembi.utils.TypeGameEnum;
 
 public class Start {
 
+	private int numberRounds = 0;
+	private int typeGame = 0;
+
 	/**
 	 * Método responsável por setar os usuários iniciais.
 	 */
@@ -25,11 +28,17 @@ public class Start {
 		users[1] = new User("COMPUTADOR");
 
 		// Tipo de jogo
-		int typeGame = Integer.parseInt(JOptionPane.showInputDialog(null, Messages.informsTypeGame(), "Tipo de jogo",
+		typeGame = Integer.parseInt(JOptionPane.showInputDialog(null, Messages.informsTypeGame(), "Tipo de jogo",
 				JOptionPane.INFORMATION_MESSAGE));
 
+		// Verifica se o usuário escolher informar o número de rodadas.
+		if (typeGame == 3) {
+			numberRounds = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o número de rodadas",
+					"Quantidade de rodadas", JOptionPane.INFORMATION_MESSAGE));
+		}
+
 		// Seta os valores iniciais do jogo.
-		Game game = new Game(users, TypeGameEnum.getEnum(typeGame), 0);
+		Game game = new Game(users, TypeGameEnum.getEnum(typeGame), numberRounds);
 		game.run();
 	}
 }

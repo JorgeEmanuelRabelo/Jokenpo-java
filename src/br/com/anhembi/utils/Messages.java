@@ -40,6 +40,16 @@ public class Messages {
 		return toStringArray(msg);
 	}
 
+	public static String informsActionsEndGame() {
+		String[] msg = new String[4];
+		msg[0] = "1: Pedra ganha da tesoura (amassando-a ou quebrando-a).";
+		msg[1] = "2: Tesoura ganha do papel (cortando-o).";
+		msg[2] = "3: Papel ganha da pedra(embrulhando-a).";
+		msg[3] = "4: Sair da partida";
+
+		return toStringArray(msg);
+	}
+
 	/*
 	 * Método responsável por formar mensagens.
 	 */
